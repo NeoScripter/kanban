@@ -11,17 +11,14 @@
 </head>
 
 <body>
-    @include ('partials.header')
-
-    <main class="wrapper">
-
-        @include ('partials.sidebar')
-
-        <div class="dashboard">
-
-        </div>
-
-    </main>
+    <div class="wrapper">
+        @include ('partials.header')
+        <main class="main">
+            @include ('partials.sidebar')
+            <div class="dashboard">
+            </div>
+        </main>
+    </div>
 
     @vite('resources/ts/app.ts')
 </body>

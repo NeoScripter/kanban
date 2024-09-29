@@ -2,12 +2,21 @@
     background-color: $overlay-bg;
     position: absolute;
     inset: 0;
-    min-height: calc(100vh - 6rem);
+    min-height: 100%;
+    transition: opacity 0.5s ease-in-out;
+    z-index: -1;
+    opacity: 0;
 
 
     @include m1() {
         position: static;
+        opacity: 1;
     }
+}
+
+.sidebar__overlay--visible {
+    opacity: 1;
+    z-index: 10;
 }
 
 .sidebar {

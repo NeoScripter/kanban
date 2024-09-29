@@ -13,9 +13,14 @@
 <body>
     <div class="wrapper">
         @include ('partials.header')
-        <main class="main">
+        <main class="main main--no-sidebar">
             @include ('partials.sidebar')
             <div class="dashboard">
+                hello
+
+                <button class="sidebar__show-btn">
+                    <img src="{{ asset('images/show-bar.svg') }}" alt="show bar">
+                </button>
             </div>
         </main>
     </div>

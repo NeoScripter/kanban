@@ -19,5 +19,17 @@ body {
 
 .main {
     position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: 15.8rem 1fr;
+    transition: grid-template-columns 0.5s ease-in-out;
+}
+
+.main--no-sidebar {
+    grid-template-columns: 0rem 1fr;
+
+    @include m1() {
+        .sidebar__show-btn {
+            opacity: 1;
+        }
+    }
 }

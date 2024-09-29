@@ -17,9 +17,14 @@
             <span class="header__add-btn-content">Add New Task</span>
         </button>
 
-        <button class="header__dots">
+        <button class="header__dots" id="editBoard">
             <img src="{{ asset('images/dots.svg') }}" alt="three vertical dots">
         </button>
 
+    </div>
+
+    <div class="header__board-popup">
+        <button class="header__edit-board">Edit Board</button>
+        <button class="header__delete-board">Delete Board</button>
     </div>
 </header>

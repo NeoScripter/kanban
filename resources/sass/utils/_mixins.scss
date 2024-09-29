@@ -46,6 +46,15 @@
     }
 }
 
+@mixin fs14() {
+    & {
+        font-size: rem(14px);
+        font-style: normal;
+        font-weight: 500;
+        line-height: rem(23px);
+    }
+}
+
 @mixin fs15() {
     & {
         font-size: rem(15px);

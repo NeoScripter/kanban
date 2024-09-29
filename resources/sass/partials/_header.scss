@@ -1,5 +1,6 @@
 
 .header {
+    position: relative;
     padding: rem(20px) 1rem;
     user-select: none;
     display: flex;
@@ -142,4 +143,40 @@
             width: 0.5rem;
         }
     }
+}
+
+.header__board-popup {
+    z-index: 1;
+    position: absolute;
+    width: rem(190px);
+    background-color: var(--header-bg);
+    border-radius: 1rem;
+    padding: 1rem;
+    right: 1rem;
+    top: 90%;
+    display: grid;
+    gap: 1rem;
+    place-items: start;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        display: block;
+        font-size: 1rem;
+    }
+}
+
+.header__board-popup--visible {
+    opacity: 1;
+}
+
+.header__edit-board {
+    color: $gray-300;
+}
+
+.header__delete-board {
+    color: $red-400;
 }

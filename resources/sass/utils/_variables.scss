@@ -6,11 +6,17 @@ $breakpoint2: rem(1440px);
 $wrapper-width: rem(736px);
 
 // Colors
+$white-400: #fff;
+$blue-100: #E4EBFA;
+$blue-50: rgba(99, 95, 199, 0.10);
 $gray-400: #828FA3;
 $gray-300: #828FA3;
 $purple-400: #635FC7;
 $purple-100: #A8A4FF;
 $red-400: #EA5555;
+
+
+$overlay-bg: rgba(0,0,0,0.5);
 $box-sh: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
 
 
@@ -18,12 +24,16 @@ $box-sh: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
     --body-bg: #F4F7FD;
     --header-bg: #FFF;
     --font-color: #000112;
+    --li-bg-hover: rgba(99, 95, 199, 0.1);
+    --border-color: #E4EBFA;
 }
 
 :root:has(#dark-mode:checked) {
     --body-bg: #20212C;
     --header-bg: #2B2C37;
     --font-color: #fff;
+    --li-bg-hover: #fff;
+    --border-color: #3E3F4E;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,6 +41,8 @@ $box-sh: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
         --body-bg: #20212C;
         --header-bg: #2B2C37;
         --font-color: #fff;
+        --li-bg-hover: #fff;
+        --border-color: #3E3F4E;
     }
 }
 
@@ -39,5 +51,7 @@ $box-sh: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
         --body-bg: #F4F7FD;
         --header-bg: #FFF;
         --font-color: #000112;
+        --li-bg-hover: rgba(99, 95, 199, 0.1);
+        --border-color: #E4EBFA;
     }
 }

@@ -29,36 +29,95 @@
 }
 
 @mixin fs12() {
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    & {
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
 }
 
 @mixin fs13() {
-    font-size: rem(13px);
-    font-style: normal;
-    font-weight: 500;
-    line-height: rem(23px);
+    & {
+        font-size: rem(13px);
+        font-style: normal;
+        font-weight: 500;
+        line-height: rem(23px);
+    }
 }
 
 @mixin fs15() {
-    font-size: rem(15px);
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    & {
+        font-size: rem(15px);
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
 }
 
 @mixin fs18() {
-    font-size: rem(18px);
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    & {
+        font-size: rem(18px);
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    @include m1() {
+        font-size: rem(20px);
+    }
+
+    @include m2() {
+        font-size: rem(24px);
+    }
 }
 
 @mixin fs20() {
-    font-size: rem(20px);
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    & {
+        font-size: rem(20px);
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+}
+
+@mixin fs32() {
+    & {
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+        font-family: "Bold";
+    }
+}
+
+@mixin btn-primary($width: min-content) {
+    cursor: pointer;
+    color: $white-400;
+    font-family: "Bold";
+    width: $width;
+    background-color: $purple-400;
+    padding: 1rem 1.15rem;
+    border-radius: 1.5rem;
+    border: none;
+    transition: background-color 0.3s ease;
+
+    @include hover() {
+        background-color: $purple-100;
+    }
+}
+
+@mixin btn-secondary() {
+    cursor: pointer;
+    color: $white-400;
+    font-family: "Bold";
+    background-color: $purple-400;
+    padding: 0.75rem 1.25rem;
+    border-radius: 1.5rem;
+    border: none;
+    transition: background-color 0.3s ease;
+
+    @include hover() {
+        background-color: $purple-100;
+    }
 }

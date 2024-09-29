@@ -1,63 +1,145 @@
 
-
-
-
-.header__toggle {
+.header {
+    padding: rem(20px) 1rem;
     user-select: none;
-}
-
-input[type="checkbox"].header__theme-toggle {
-    appearance: none;
-    opacity: 0;
-}
-
-input[type="checkbox"].header__theme-toggle:focus-visible + label::before {
-    outline: rem(1px) solid red;
-}
-
-input[type="checkbox"].header__theme-toggle + label {
     display: flex;
-    flex-direction: column;
-    position: relative;
     align-items: center;
-    cursor: pointer;
-    color: red;
+    gap: clamp(0.5rem, 3vw , 1.5rem);
+    background-color: var(--header-bg);
 
-}
-
-input[type="checkbox"].header__theme-toggle + label::before {
-    content: '';
-    width: rem(56px);
-    height: rem(32px);
-    background-color: red;
-    border-radius: 1em;
-    margin-bottom: 0.25em;
-    transition: background-color 0.2s ease-in-out;
-}
-
-input[type="checkbox"].header__theme-toggle + label::after {
-    content: '';
-    position: absolute;
-    left: 1em;
-    top: 0.1rem;
-    width: rem(28px);
-    height: rem(28px);
-    background-color: red;
-    border-radius: 1em;
-    margin-right: 0.25em;
-    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-
-input[type="checkbox"].header__theme-toggle:checked + label::after {
-    transform: translateX(90%);
-}
-
-
-.header__theme-toggle {
-    input[type="checkbox"].header__theme-toggle + label::after {
-        top: 0.15rem;
+    @include m1() {
+        padding: 1.6rem rem(26px);
+        gap: 1.5rem;
     }
-    input[type="checkbox"].header__theme-toggle + label {
-        color: red;
+}
+
+.header__logo-img {
+    height: 1.5rem;
+    width: 1.5rem;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.header__logo-text {
+    display: none;
+    color: var(--font-color);
+
+    @include m1() {
+        display: block;
+        padding-right: rem(80px);
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: -1.8rem;
+            bottom: -1.8rem;
+            border-right: rem(1px) solid var(--border-color);
+        }
+    }
+    @include fs32();
+}
+
+.header__board-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    border: none;
+    font-family: 'Bold';
+    cursor: pointer;
+    color: var(--font-color);
+
+    @include fs18();
+
+    img {
+        width: 1rem;
+        height: 0.5rem;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    @include m1() {
+        display: none;
+    }
+}
+
+.header__board {
+    display: none;
+
+    @include m1() {
+        display: block;
+        font-family: 'Bold';
+    }
+
+    @include fs18();
+}
+
+.header__btn-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+
+    @include m1() {
+        gap: 1.5rem;
+    }
+}
+
+.header__add-btn {
+    font-size: 2rem;
+    flex-shrink: 0;
+    @include btn-secondary();
+
+    img {
+        height: 0.75rem;
+    }
+
+    @include m1() {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        img {
+            height: 0.5rem;
+        }
+    }
+    @include fs15();
+}
+
+.header__add-btn-content {
+    display: none;
+
+    @include m1() {
+        display: block;
+    }
+    @include fs15();
+}
+
+.header__dots {
+    height: 1rem;
+    width: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    img {
+        width: 0.25rem;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    @include m1() {
+        height: 1.25rem;
+
+        img {
+            width: 0.5rem;
+        }
     }
 }

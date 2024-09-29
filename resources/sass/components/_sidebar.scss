@@ -1,0 +1,257 @@
+.sidebar__overlay {
+    background-color: $overlay-bg;
+    position: absolute;
+    inset: 0;
+    min-height: calc(100vh - 6rem);
+
+
+    @include m1() {
+        position: static;
+    }
+}
+
+.sidebar {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: rem(253px);
+    background-color: var(--header-bg);
+    border-radius: 1rem;
+    padding-block: 1rem;
+
+    @include m1() {
+        position: static;
+        transform: translateX(0%);
+        height: 100%;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.sidebar__title {
+    text-transform: uppercase;
+    color: $gray-400;
+    letter-spacing: rem(2.4px);
+    padding-inline: 1.5rem;
+    font-family: 'Regular';
+
+
+    @include fs12();
+}
+
+.sidebar__boards {
+    margin-top: 1.25rem;
+}
+
+.sidebar__board {
+    border-radius: 0 2rem 2rem 0;
+    width: 90%;
+    transition: background-color 0.3s ease,
+    color 0.3s ease;
+
+    @include hover() {
+        background-color: var(--li-bg-hover);
+
+        button {
+            color: $purple-400;
+        }
+
+        path {
+            fill: $purple-400;
+        }
+    }
+
+    button {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-family: 'Bold';
+        display: flex;
+        align-items: center;
+        color: $gray-400;
+        gap: 0.75rem;
+
+        @include fs15();
+
+        svg {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    path {
+        fill: $gray-400;
+    }
+}
+
+.sidebar__board--selected {
+    background-color: $purple-400;
+
+    button {
+        color: $white-400;
+    }
+
+    path {
+        fill: $white-400;
+    }
+}
+
+.sidebar__create-btn {
+    width: 90%;
+    border-radius: 0 2rem 2rem 0;
+    padding: 1rem 1.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'Bold';
+    display: flex;
+    align-items: center;
+    color: $purple-400;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+
+    @include fs15();
+
+    svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    path {
+        fill: $purple-400;
+    }
+    transition: background-color 0.3s ease,
+    color 0.3s ease;
+
+    @include hover() {
+        background-color: var(--li-bg-hover);
+
+        button {
+            color: $purple-400;
+        }
+
+        path {
+            fill: $purple-400;
+        }
+    }
+}
+
+.sidebar__theme-group {
+    user-select: none;
+    border-radius: 1rem;
+    background-color: $blue-50;
+    margin-inline: 0.5rem;
+
+    @include m1() {
+        margin-top: auto;
+    }
+}
+
+.sidebar__theme-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.sidebar__theme-icon {
+    width: 1rem;
+    height: 1rem;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.sidebar__theme-toggle {
+    display: grid;
+    place-content: center;
+}
+
+.sidebar__hide-btn {
+    margin-top: 0.3rem;
+    border-radius: 0 2rem 2rem 0;
+    width: 90%;
+    transition: background-color 0.3s ease,
+    color 0.3s ease;
+    padding: 1rem 1.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'Bold';
+    display: none;
+    align-items: center;
+    color: $gray-400;
+    gap: 0.75rem;
+
+    @include fs15();
+
+    @include hover() {
+        background-color: var(--li-bg-hover);
+
+        button {
+            color: $purple-400;
+        }
+
+        path {
+            fill: $purple-400;
+        }
+    }
+
+    svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    @include m1() {
+        display: flex;
+    }
+}
+
+input[type="checkbox"].sidebar__theme-checkbox {
+    appearance: none;
+    opacity: 0;
+}
+
+input[type="checkbox"].sidebar__theme-checkbox:focus-visible + label {
+    outline: rem(1px) solid $gray-300;
+}
+
+input[type="checkbox"].sidebar__theme-checkbox + label {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    width: rem(35px);
+    height: rem(20px);
+    border-radius: 1em;
+    transition: background-color 0.2s ease-in-out;
+    background-color: $purple-400;
+
+}
+
+input[type="checkbox"].sidebar__theme-checkbox + label::after {
+    content: '';
+    position: absolute;
+    left: 0.14em;
+    top: 0.12rem;
+    width: rem(16px);
+    height: rem(16px);
+    background-color: $white-400;
+    border-radius: 1em;
+    margin-right: 0.25em;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+input[type="checkbox"].sidebar__theme-checkbox:checked + label::after {
+    transform: translateX(90%);
+}
+
+

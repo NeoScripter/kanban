@@ -1,0 +1,43 @@
+// Breakpoints
+$breakpoint1: rem(768px);
+$breakpoint2: rem(1440px);
+
+// Sizes
+$wrapper-width: rem(736px);
+
+// Colors
+$gray-400: #828FA3;
+$gray-300: #828FA3;
+$purple-400: #635FC7;
+$purple-100: #A8A4FF;
+$red-400: #EA5555;
+$box-sh: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
+
+
+:root {
+    --body-bg: #F4F7FD;
+    --header-bg: #FFF;
+    --font-color: #000112;
+}
+
+:root:has(#dark-mode:checked) {
+    --body-bg: #20212C;
+    --header-bg: #2B2C37;
+    --font-color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --body-bg: #20212C;
+        --header-bg: #2B2C37;
+        --font-color: #fff;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --body-bg: #F4F7FD;
+        --header-bg: #FFF;
+        --font-color: #000112;
+    }
+}

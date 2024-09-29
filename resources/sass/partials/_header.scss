@@ -1,0 +1,63 @@
+
+
+
+
+.header__toggle {
+    user-select: none;
+}
+
+input[type="checkbox"].header__theme-toggle {
+    appearance: none;
+    opacity: 0;
+}
+
+input[type="checkbox"].header__theme-toggle:focus-visible + label::before {
+    outline: rem(1px) solid red;
+}
+
+input[type="checkbox"].header__theme-toggle + label {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    color: red;
+
+}
+
+input[type="checkbox"].header__theme-toggle + label::before {
+    content: '';
+    width: rem(56px);
+    height: rem(32px);
+    background-color: red;
+    border-radius: 1em;
+    margin-bottom: 0.25em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+input[type="checkbox"].header__theme-toggle + label::after {
+    content: '';
+    position: absolute;
+    left: 1em;
+    top: 0.1rem;
+    width: rem(28px);
+    height: rem(28px);
+    background-color: red;
+    border-radius: 1em;
+    margin-right: 0.25em;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+input[type="checkbox"].header__theme-toggle:checked + label::after {
+    transform: translateX(90%);
+}
+
+
+.header__theme-toggle {
+    input[type="checkbox"].header__theme-toggle + label::after {
+        top: 0.15rem;
+    }
+    input[type="checkbox"].header__theme-toggle + label {
+        color: red;
+    }
+}

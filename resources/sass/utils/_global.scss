@@ -1,0 +1,16 @@
+html,
+body {
+    overflow-x: hidden;
+    overflow-x: clip;
+}
+
+body {
+    font-family: "Regular";
+    min-height: 100vh;
+    color: var(--font-color);
+    background-color: var(--body-bg);
+}
+
+.wrapper {
+
+}

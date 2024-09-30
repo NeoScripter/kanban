@@ -9,6 +9,8 @@ class Dashboard extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'user_id'];
+
     public function categories()
     {
         return $this->hasMany(Category::class);

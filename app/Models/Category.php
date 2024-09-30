@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'dashboard_id'];
+
     public function dashboard()
     {
         return $this->belongsTo(Dashboard::class);

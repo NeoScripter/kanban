@@ -1,27 +1,17 @@
 <sidebar class="sidebar__overlay">
 
     <div class="sidebar">
-        <h3 class="sidebar__title">All Boards (3)</h3>
+        <h3 class="sidebar__title">All Boards ({{ $dashboards->count() }})</h3>
 
         <ul class="sidebar__boards">
-            <li class="sidebar__board sidebar__board--selected">
-                <button>
-                    {!! file_get_contents(public_path('images/board.svg')) !!}
-                    Platform Launch
-                </button>
-            </li>
-            <li class="sidebar__board">
-                <button>
-                    {!! file_get_contents(public_path('images/board.svg')) !!}
-                    Marketing Plan
-                </button>
-            </li>
-            <li class="sidebar__board">
-                <button>
-                    {!! file_get_contents(public_path('images/board.svg')) !!}
-                    Roadmap
-                </button>
-            </li>
+            @foreach ($dashboards as $dashboard)
+                <li class="sidebar__board {{ $dashboard->id == $currentDashboardId ? 'sidebar__board--selected' : '' }}">
+                    <a href="{{ route('dashboard.select', $dashboard->id) }}" class="sidebar__board-link">
+                        {!! file_get_contents(public_path('images/board.svg')) !!}
+                        {{ $dashboard->name }}
+                    </a>
+                </li>
+            @endforeach
         </ul>
 
         <button class="sidebar__create-btn">

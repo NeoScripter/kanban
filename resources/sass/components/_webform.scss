@@ -19,12 +19,21 @@
 
     label {
         color: $gray-400;
-        @include fs12();
+        @include fs13();
     }
 
     input {
-        padding: 0.3rem;
-        @include fs13();
+        padding: 0.5rem;
+        border-color: $gray-200;
+        @include fs14();
+    }
+
+    input::placeholder {
+        color: $gray-400;
+    }
+
+    .category-input {
+        margin-bottom: 0.5rem;
     }
 }
 

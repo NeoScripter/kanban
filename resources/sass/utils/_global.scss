@@ -75,3 +75,17 @@ body {
         }
     }
 }
+
+.flash-message {
+    position: fixed;
+    top: 2rem;
+    border: rem(1px) solid var(--border-color);
+    background-color: var(--body-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    z-index: 20;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.5s ease-in-out;
+    @include fs20();
+}

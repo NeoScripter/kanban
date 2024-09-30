@@ -230,7 +230,8 @@
 }
 
 .sidebar__login,
-.sidebar__signup {
+.sidebar__signup,
+.sidebar__logout {
     @extend .sidebar__hide-btn;
     display: flex;
 }

@@ -1,4 +1,5 @@
 <sidebar class="sidebar__overlay">
+
     <div class="sidebar">
         <h3 class="sidebar__title">All Boards (3)</h3>
 
@@ -43,15 +44,29 @@
             </div>
         </div>
 
-        <button class="sidebar__login" id="openLoginPopup">
-            {!! file_get_contents(public_path('images/login.svg')) !!}
-            Login
-        </button>
 
-        <button class="sidebar__signup" id="openSignupPopup">
-            {!! file_get_contents(public_path('images/signup.svg')) !!}
-            Sign up
-        </button>
+        @guest
+            <button class="sidebar__login" id="openLoginPopup">
+                {!! file_get_contents(public_path('images/login.svg')) !!}
+                Login
+            </button>
+
+            <button class="sidebar__signup" id="openSignupPopup">
+                {!! file_get_contents(public_path('images/signup.svg')) !!}
+                Sign up
+            </button>
+        @endguest
+
+        @auth
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button class="sidebar__logout" id="logoutBtn" aria-label="Log out">
+                    {!! file_get_contents(public_path('images/login.svg')) !!}
+                    Logout
+                </button>
+            </form>
+        @endauth
+
 
         <button class="sidebar__hide-btn">
             {!! file_get_contents(public_path('images/hide-bar.svg')) !!}
@@ -59,4 +74,5 @@
         </button>
 
     </div>
+
 </sidebar>

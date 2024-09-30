@@ -12,6 +12,10 @@
 
     <div class="header__btn-group">
 
+        @auth
+            <h3 class="header__board">Hi, {{ auth()->user()->name }}!</h3>
+        @endauth
+
         <button class="header__add-btn">
             <img src="{{ asset('images/plus.svg') }}" alt="plus sign">
             <span class="header__add-btn-content">Add New Task</span>

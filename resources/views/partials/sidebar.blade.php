@@ -43,12 +43,12 @@
             </div>
         </div>
 
-        <button class="sidebar__login">
+        <button class="sidebar__login" id="openLoginPopup">
             {!! file_get_contents(public_path('images/login.svg')) !!}
             Login
         </button>
 
-        <button class="sidebar__signup">
+        <button class="sidebar__signup" id="openSignupPopup">
             {!! file_get_contents(public_path('images/signup.svg')) !!}
             Sign up
         </button>

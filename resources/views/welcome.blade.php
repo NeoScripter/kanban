@@ -11,9 +11,15 @@
 </head>
 
 <body>
+    <div class="overlay" id="overlaySignup">
+        @include ('livewire.signup')
+    </div>
+    <div class="overlay" id="overlayLogin">
+        @include ('livewire.login')
+    </div>
     <div class="wrapper">
         @include ('partials.header')
-        <main class="main main--no-sidebar">
+        <main class="main">
             @include ('partials.sidebar')
 
             @include ('partials.dashboard')

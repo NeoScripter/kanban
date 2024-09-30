@@ -15,6 +15,15 @@ export default class AnimationHandler {
     hideSidebarBtn: HTMLElement | null;
     showSidebarBtn: HTMLElement | null;
 
+    popups: NodeListOf<HTMLElement> | null;
+    popupVisibleClass: string;
+    loginBtn: HTMLElement | null;
+    signupBtn: HTMLElement | null;
+    webformLoginBtn: HTMLElement | null;
+    webformSignupBtn: HTMLElement | null;
+    loginPopup: HTMLElement | null;
+    signupPopup: HTMLElement | null;
+
     constructor() {
         // Theme setup
         this.themeLabels = document.querySelectorAll(
@@ -39,6 +48,16 @@ export default class AnimationHandler {
         this.sidebarParent = document.querySelector(".main");
         this.hideSidebarBtn = document.querySelector(".sidebar__hide-btn");
         this.showSidebarBtn = document.querySelector(".sidebar__show-btn");
+
+        // Popup handler
+        this.popups = document.querySelectorAll('.overlay');
+        this.popupVisibleClass = 'overlay--visible';
+        this.loginBtn = document.querySelector('#openLoginPopup');
+        this.signupBtn = document.querySelector('#openSignupPopup');
+        this.webformLoginBtn = document.querySelector('#webformLoginBtn');
+        this.webformSignupBtn = document.querySelector('#webformSignupBtn');
+        this.loginPopup = document.querySelector('#overlayLogin');
+        this.signupPopup = document.querySelector('#overlaySignup');
     }
 
     init() {
@@ -46,6 +65,69 @@ export default class AnimationHandler {
         this.toggleMenuPopup();
         this.toggleEditBoardPopup();
         this.toggleSidebar();
+        this.setupPopupEvents();
+    }
+
+    // Popup handler
+
+    setupPopupEvents() {
+        if (!this.loginPopup || !this.signupPopup || !this.signupBtn || !this.loginBtn || !this.webformLoginBtn || !this.webformSignupBtn || !this.popups) {
+            console.warn("Buttons or popups are not in the DOM!");
+            return;
+        }
+
+        this.signupBtn.addEventListener('click', () => {
+            this.closeSidebarPopup();
+            this.closeAllOtherPopups();
+            this.signupPopup?.classList.add(this.popupVisibleClass);
+        })
+
+        this.loginBtn.addEventListener('click', () => {
+            this.closeSidebarPopup();
+            this.closeAllOtherPopups();
+            this.loginPopup?.classList.add(this.popupVisibleClass);
+        })
+
+        this.webformLoginBtn.addEventListener('click', () => {
+            this.closeSidebarPopup();
+            this.closeAllOtherPopups();
+            this.signupPopup?.classList.add(this.popupVisibleClass);
+        })
+
+        this.webformSignupBtn.addEventListener('click', () => {
+            this.closeSidebarPopup();
+            this.closeAllOtherPopups();
+            this.loginPopup?.classList.add(this.popupVisibleClass);
+        })
+
+        this.popups.forEach(popup => {
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.classList.remove(this.popupVisibleClass);
+                }
+            })
+        })
+    }
+
+    // Popup handler helpers
+
+    closeAllOtherPopups() {
+        if (!this.popups) {
+            console.warn("Popups are not in the DOM!");
+            return;
+        }
+        this.popups.forEach(popup => {
+            popup.classList.remove(this.popupVisibleClass);
+        })
+    }
+
+    closeSidebarPopup() {
+        if (!this.menuPopup) {
+            console.warn("Popup is not in the DOM!");
+            return;
+        }
+
+        this.menuPopup.classList.remove(this.menuPopupVisibleClassName);
     }
 
     // Menu Popup Toggler

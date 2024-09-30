@@ -1,0 +1,48 @@
+.webform {
+    background-color: $white-400;
+    display: grid;
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 0.75rem;
+    width: min(30rem, 95vw);
+
+}
+
+.webform__title {
+    color: var(--font-color);
+    @include fs18();
+}
+
+.webform__input-group {
+    display: grid;
+    gap: 0.5rem;
+
+    label {
+        color: $gray-400;
+        @include fs12();
+    }
+
+    input {
+        padding: 0.3rem;
+        @include fs13();
+    }
+}
+
+.error-message {
+    color: $red-400;
+    @include fs13();
+}
+
+.webform__login-btn {
+    margin-top: 1rem;
+    @include btn-tertiary();
+}
+
+.webform__submit-btn {
+    @include btn-secondary();
+}
+
+.webform__signup-btn {
+    margin-top: 1rem;
+    @include btn-tertiary();
+}

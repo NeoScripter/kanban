@@ -43,6 +43,16 @@
             </div>
         </div>
 
+        <button class="sidebar__login">
+            {!! file_get_contents(public_path('images/login.svg')) !!}
+            Login
+        </button>
+
+        <button class="sidebar__signup">
+            {!! file_get_contents(public_path('images/signup.svg')) !!}
+            Sign up
+        </button>
+
         <button class="sidebar__hide-btn">
             {!! file_get_contents(public_path('images/hide-bar.svg')) !!}
             Hide Bar

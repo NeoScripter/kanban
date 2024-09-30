@@ -5,7 +5,8 @@
     inset: 0;
     min-height: 100%;
     transition: opacity 0.5s ease-in-out,
-    transform 0.5s ease-in-out;
+    transform 0.5s ease-in-out,
+    z-index 0.5s ease;
     z-index: -1;
     opacity: 0;
 
@@ -126,6 +127,9 @@
     color: $purple-400;
     gap: 0.75rem;
     margin-bottom: 1rem;
+    transition: background-color 0.3s ease,
+    color 0.3s ease;
+
 
     @include fs15();
 
@@ -137,9 +141,6 @@
     path {
         fill: $purple-400;
     }
-    transition: background-color 0.3s ease,
-    color 0.3s ease;
-
     @include hover() {
         background-color: var(--li-bg-hover);
 
@@ -207,6 +208,7 @@
 
     @include hover() {
         background-color: var(--li-bg-hover);
+        color: $purple-400;
 
         button {
             color: $purple-400;
@@ -225,6 +227,12 @@
     @include m1() {
         display: flex;
     }
+}
+
+.sidebar__login,
+.sidebar__signup {
+    @extend .sidebar__hide-btn;
+    display: flex;
 }
 
 .sidebar__show-btn--visible {

@@ -1,8 +1,85 @@
 .dashboard {
     border-top: rem(1px) solid var(--border-color);
     border-left: rem(1px) solid var(--border-color);
+    padding: 1.5rem 1rem;
+    margin-right: 1rem;
 
     position: relative;
+
+    @include m2() {
+        padding: 1.5rem 1.5rem;
+        margin-right: 1.5rem;
+    }
+}
+
+.dashboard__grid {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1.5rem;
+    place-content: start;
+}
+
+.dashboard__column {
+    display: grid;
+    gap: 1.5rem;
+    place-content: start;
+}
+
+.dashboard__column--new {
+    background: var(--col-gr);
+    align-self: stretch;
+    min-height: 80vh;
+    margin-top: 2.4rem;
+    border-radius: 0.5rem;
+    width: rem(280px);
+    display: grid;
+    place-content: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-family: 'Bold';
+    letter-spacing: 0.1rem;
+    color: $gray-300;
+}
+
+.dashboard__title {
+    user-select: none;
+    text-transform: uppercase;
+    color: $gray-400;
+    letter-spacing: rem(2.4px);
+    font-family: 'Regular';
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    @include fs12();
+}
+
+.dashboard__task {
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--header-bg);
+    width: rem(280px);
+}
+
+.dashboard__color {
+    display: block;
+    width: 0.75rem;
+    height: .75rem;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.dashboard__task-title {
+    color: var(--font-color);
+    font-family: 'Bold';
+    margin-bottom: 0.5rem;
+    @include fs15();
+}
+
+.dashboard__task-content {
+    color: $gray-400;
+    @include fs12();
 }
 
 .sidebar__show-btn {

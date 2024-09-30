@@ -4,6 +4,24 @@ body {
     overflow-x: clip;
 }
 
+html:has(.sidebar__overlay--visible),
+body:has(.sidebar__overlay--visible) {
+    .main {
+        overflow-x: hidden;
+        overflow-x: clip;
+        width: 100vw;
+    }
+}
+
+html:has(.overlay--visible),
+body:has(.overlay--visible) {
+    .main {
+        overflow-x: hidden;
+        overflow-x: clip;
+        width: 100vw;
+    }
+}
+
 body {
     font-family: "Regular";
     min-height: 100vh;
@@ -17,11 +35,35 @@ body {
     min-height: 100vh;
 }
 
+.overlay {
+    overflow: hidden;
+    background-color: $overlay-bg;
+    position: fixed;
+    display: grid;
+    place-content: center;
+    inset: 0;
+    min-height: 100%;
+    transition: opacity 0.5s ease-in-out,
+    transform 0.5s ease-in-out,
+    z-index 0.5s ease;
+    z-index: -1;
+    opacity: 0;
+}
+
+.overlay--visible {
+    opacity: 1;
+    z-index: 10;
+}
+
 .main {
     position: relative;
-    display: grid;
-    grid-template-columns: 15.8rem 1fr;
-    transition: grid-template-columns 0.5s ease-in-out;
+    overflow-x: scroll;
+
+    @include m1() {
+        display: grid;
+        grid-template-columns: 15.8rem 1fr;
+        transition: grid-template-columns 0.5s ease-in-out;
+    }
 }
 
 .main--no-sidebar {

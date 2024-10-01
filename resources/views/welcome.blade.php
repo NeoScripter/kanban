@@ -19,21 +19,25 @@
         </div>
     @endif
 
+    @auth
         @include('popups.create-board')
 
         @include('popups.edit-board')
 
         @include('popups.delete-board')
 
-        @livewire('signup')
+        @include('popups.add-task')
+    @endauth
 
-        @livewire('login')
+    @livewire('signup')
+
+    @livewire('login')
 
     <div class="wrapper">
         @include ('partials.header')
         <main class="main">
 
-                @include('partials.sidebar')
+            @include('partials.sidebar')
 
             @include ('partials.dashboard')
         </main>

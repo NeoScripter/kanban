@@ -13,7 +13,8 @@ class DashboardController extends Controller
     {
         if (!Auth::check()) {
             return view('welcome', [
-                'dashboards' => null
+                'dashboards' => null,
+                'currentDashboardId' => null
             ]);
         }
         $dashboards = Auth::user()->dashboards;
@@ -89,8 +90,10 @@ class DashboardController extends Controller
         return redirect()->route('home');
     }
 
-    public function destroy(Dashboard $dashboard)
+    public function destroy()
     {
+        $dashboard = session('current_dashboard_id');
+
         $this->authorize('delete-dashboard', $dashboard);
 
         $dashboard->delete();

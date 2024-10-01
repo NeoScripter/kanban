@@ -1,4 +1,4 @@
-export default class editBoardHandler {
+export default class EditBoardHandler {
     addColumnBtnSelector: string;
     addNewColumnInputWrapperSelector: string;
     deleteColumnBtnSelector: string;

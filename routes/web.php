@@ -24,6 +24,6 @@ Route::post('/dashboard.store', [DashboardController::class, 'store'])->name('da
 
 Route::put('/dashboard.edit', [DashboardController::class, 'update'])->name('dashboard.edit');
 
-Route::delete('/dashboard/{dashboard}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
+Route::delete('/dashboard', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');

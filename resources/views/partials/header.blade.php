@@ -19,7 +19,7 @@
             @foreach ($dashboards as $dashboard)
                 @if (session('current_dashboard_id') == $dashboard->id)
                     @if ($dashboard->categories->isNotEmpty())
-                        <button class="header__add-btn">
+                        <button class="header__add-btn" id="addNewTaskBtn">
                             <img src="{{ asset('images/plus.svg') }}" alt="plus sign">
                             <span class="header__add-btn-content">Add New Task</span>
                         </button>

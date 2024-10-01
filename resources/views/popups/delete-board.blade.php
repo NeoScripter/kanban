@@ -1,5 +1,5 @@
 <div class="overlay" id="deleteBoardPopup">
-    <form action="{{ route('dashboard.destroy', session('current_dashboard_id')) }}" method="post" class="webform">
+    <form action="{{ route('dashboard.destroy') }}" method="post" class="webform">
         @csrf
         @method('delete')
 

@@ -1,6 +1,5 @@
 export default class AnimationHandler {
-    themeLabels: NodeListOf<HTMLElement>;
-    themeCheckboxes: NodeListOf<HTMLInputElement>;
+    themeCheckbox: HTMLInputElement | null;
 
     menuPopupVisibleClassName: string;
     menuPopupBtn: HTMLElement | null;
@@ -31,14 +30,14 @@ export default class AnimationHandler {
     deleteBoardPopup: HTMLElement | null;
     cancelDeleteBoardBtn: HTMLElement | null;
 
+    coloredSpans: NodeListOf<HTMLElement> | null;
+
+    addTaskBtnPopup: HTMLElement | null;
+    addTaskPopup: HTMLElement | null;
+
     constructor() {
         // Theme setup
-        this.themeLabels = document.querySelectorAll(
-            ".header label"
-        ) as NodeListOf<HTMLElement>;
-        this.themeCheckboxes = document.querySelectorAll(
-            '.header input[type="checkbox"]'
-        ) as NodeListOf<HTMLInputElement>;
+        this.themeCheckbox = document.querySelector("#dark-mode");
 
         // Menu popup
         this.menuPopupVisibleClassName = "sidebar__overlay--visible";
@@ -57,21 +56,32 @@ export default class AnimationHandler {
         this.showSidebarBtn = document.querySelector(".sidebar__show-btn");
 
         // Popup handler
-        this.popups = document.querySelectorAll('.overlay');
-        this.popupVisibleClass = 'overlay--visible';
-        this.loginBtn = document.querySelector('#openLoginPopup');
-        this.signupBtn = document.querySelector('#openSignupPopup');
-        this.webformLoginBtn = document.querySelector('#webformLoginBtn');
-        this.webformSignupBtn = document.querySelector('#webformSignupBtn');
-        this.loginPopup = document.querySelector('#overlayLogin');
-        this.signupPopup = document.querySelector('#overlaySignup');
-        this.flashMessage = document.querySelector('.flash-message');
-        this.loginDashboardBtn = document.querySelector('#loginDashboardBtn');
+        this.popups = document.querySelectorAll(".overlay");
+        this.popupVisibleClass = "overlay--visible";
+        this.loginBtn = document.querySelector("#openLoginPopup");
+        this.signupBtn = document.querySelector("#openSignupPopup");
+        this.webformLoginBtn = document.querySelector("#webformLoginBtn");
+        this.webformSignupBtn = document.querySelector("#webformSignupBtn");
+        this.loginPopup = document.querySelector("#overlayLogin");
+        this.signupPopup = document.querySelector("#overlaySignup");
+        this.flashMessage = document.querySelector(".flash-message");
+        this.loginDashboardBtn = document.querySelector("#loginDashboardBtn");
 
         // Delete Board
-        this.deleteBoardBtnPopup = document.querySelector('#deleteBoardPopupBtn');
-        this.deleteBoardPopup = document.querySelector('#deleteBoardPopup');
-        this.cancelDeleteBoardBtn = document.querySelector('#cancelDeleteBoardBtn');
+        this.deleteBoardBtnPopup = document.querySelector(
+            "#deleteBoardPopupBtn"
+        );
+        this.deleteBoardPopup = document.querySelector("#deleteBoardPopup");
+        this.cancelDeleteBoardBtn = document.querySelector(
+            "#cancelDeleteBoardBtn"
+        );
+
+        // Colored spans
+        this.coloredSpans = document.querySelectorAll(".dashboard__color");
+
+        // Add New Task
+        this.addTaskPopup = document.querySelector("#addTaskPopup");
+        this.addTaskBtnPopup = document.querySelector("#addNewTaskBtn");
     }
 
     init() {
@@ -85,6 +95,35 @@ export default class AnimationHandler {
         this.fadeOutFlashMessage();
         this.openDeleteBoardPopup();
         this.closeDeleteBoardPopup();
+        this.assignColorsToSpans();
+        this.openAddTaskPopup();
+    }
+
+    // Open Add New Task Popup
+
+    openAddTaskPopup() {
+        if (!this.addTaskPopup || !this.addTaskBtnPopup) {
+            return;
+        }
+
+        this.addTaskBtnPopup.addEventListener("click", () => {
+            this.addTaskPopup?.classList.add(this.popupVisibleClass);
+        });
+    }
+
+
+    // Assign colors to spans
+
+    assignColorsToSpans() {
+        const colors = ["#1abc9c", "#3498db", "#9b59b6", "#e74c3c", "#f39c12"];
+        let colorIndex = 0;
+
+        if (!this.coloredSpans) return;
+
+        this.coloredSpans.forEach((span) => {
+            span.style.backgroundColor = colors[colorIndex % colors.length];
+            colorIndex++;
+        });
     }
 
     // Flash Message
@@ -92,62 +131,72 @@ export default class AnimationHandler {
     fadeOutFlashMessage() {
         setTimeout(() => {
             if (!this.flashMessage) return;
-            this.flashMessage.style.opacity = '0';
+            this.flashMessage.style.opacity = "0";
         }, 3000);
 
         setTimeout(() => {
             if (!this.flashMessage) return;
-            this.flashMessage.style.display = 'none';
+            this.flashMessage.style.display = "none";
         }, 3500);
     }
 
     // Popup handler
 
     setupSignupPopupEvents() {
-        if (!this.signupPopup || !this.signupBtn || !this.webformLoginBtn || !this.menuPopup) {
+        if (
+            !this.signupPopup ||
+            !this.signupBtn ||
+            !this.webformLoginBtn ||
+            !this.menuPopup
+        ) {
             return;
         }
 
-        this.menuPopup.addEventListener('click', (e) => {
+        this.menuPopup.addEventListener("click", (e) => {
             const targetElement = e.target as HTMLElement;
-            if (targetElement.matches('#openSignupPopup')) {
+            if (targetElement.matches("#openSignupPopup")) {
                 this.closeSidebarPopup();
                 this.closeAllOtherPopups();
                 this.signupPopup?.classList.add(this.popupVisibleClass);
             }
-        })
+        });
 
-        this.webformLoginBtn.addEventListener('click', () => {
+        this.webformLoginBtn.addEventListener("click", () => {
             this.closeSidebarPopup();
             this.closeAllOtherPopups();
             this.signupPopup?.classList.add(this.popupVisibleClass);
-        })
+        });
     }
 
     setupLoginPopupEvents() {
-        if (!this.loginPopup || !this.loginBtn || !this.webformSignupBtn || !this.menuPopup || !this.loginDashboardBtn) {
+        if (
+            !this.loginPopup ||
+            !this.loginBtn ||
+            !this.webformSignupBtn ||
+            !this.menuPopup ||
+            !this.loginDashboardBtn
+        ) {
             return;
         }
 
-        this.menuPopup.addEventListener('click', (e) => {
+        this.menuPopup.addEventListener("click", (e) => {
             const targetElement = e.target as HTMLElement;
-            if (targetElement.matches('#openLoginPopup')) {
+            if (targetElement.matches("#openLoginPopup")) {
                 this.closeSidebarPopup();
                 this.closeAllOtherPopups();
                 this.loginPopup?.classList.add(this.popupVisibleClass);
             }
-        })
+        });
 
-        this.loginDashboardBtn.addEventListener('click', () => {
+        this.loginDashboardBtn.addEventListener("click", () => {
             this.loginPopup?.classList.add(this.popupVisibleClass);
-        })
+        });
 
-        this.webformSignupBtn.addEventListener('click', () => {
+        this.webformSignupBtn.addEventListener("click", () => {
             this.closeSidebarPopup();
             this.closeAllOtherPopups();
             this.loginPopup?.classList.add(this.popupVisibleClass);
-        })
-
+        });
     }
 
     setupPopupCloseEvent() {
@@ -155,13 +204,13 @@ export default class AnimationHandler {
             console.warn("Popups are not in the DOM!");
             return;
         }
-        this.popups.forEach(popup => {
-            popup.addEventListener('click', (e) => {
+        this.popups.forEach((popup) => {
+            popup.addEventListener("click", (e) => {
                 if (e.target === popup) {
                     popup.classList.remove(this.popupVisibleClass);
                 }
-            })
-        })
+            });
+        });
     }
 
     // Popup handler helpers
@@ -171,9 +220,9 @@ export default class AnimationHandler {
             console.warn("Popups are not in the DOM!");
             return;
         }
-        this.popups.forEach(popup => {
+        this.popups.forEach((popup) => {
             popup.classList.remove(this.popupVisibleClass);
-        })
+        });
     }
 
     closeSidebarPopup() {
@@ -217,28 +266,32 @@ export default class AnimationHandler {
 
     openDeleteBoardPopup() {
         if (!this.deleteBoardBtnPopup || !this.deleteBoardPopup) {
-            return
+            return;
         }
 
-        this.deleteBoardBtnPopup.addEventListener('click', () => {
-            this.deleteBoardPopup?.classList.add(this.popupVisibleClass)
-        })
+        this.deleteBoardBtnPopup.addEventListener("click", () => {
+            this.deleteBoardPopup?.classList.add(this.popupVisibleClass);
+        });
     }
 
     closeDeleteBoardPopup() {
         if (!this.cancelDeleteBoardBtn || !this.deleteBoardPopup) {
-            return
+            return;
         }
 
-        this.cancelDeleteBoardBtn.addEventListener('click', () => {
-            this.deleteBoardPopup?.classList.remove(this.popupVisibleClass)
-        })
+        this.cancelDeleteBoardBtn.addEventListener("click", () => {
+            this.deleteBoardPopup?.classList.remove(this.popupVisibleClass);
+        });
     }
 
     // Edit Board Popup Toggler
 
     toggleSidebar() {
-        if (!this.sidebarParent || !this.hideSidebarBtn || !this.showSidebarBtn) {
+        if (
+            !this.sidebarParent ||
+            !this.hideSidebarBtn ||
+            !this.showSidebarBtn
+        ) {
             console.warn("Sidebar btns or sidebar parents are not in the DOM!");
             return;
         }
@@ -250,67 +303,52 @@ export default class AnimationHandler {
         });
 
         this.hideSidebarBtn.addEventListener("click", () => {
-            this.sidebarParent?.classList.add(
-                this.invisibleSidebarClassName
-            );
+            this.sidebarParent?.classList.add(this.invisibleSidebarClassName);
         });
     }
 
     // Theme setup
 
     setupTheme() {
+        if (!this.themeCheckbox) return;
         this.checkThemePreference();
         this.applySavedTheme();
-        this.themeCheckboxes.forEach((checkbox) => {
-            checkbox.addEventListener("change", () => {
-                const selectedTheme = checkbox.checked ? "dark" : "light";
-                localStorage.setItem("theme", selectedTheme);
-                this.applyTheme(selectedTheme);
-            });
+        this.themeCheckbox.addEventListener("change", () => {
+            const selectedTheme = this.themeCheckbox?.checked
+                ? "dark"
+                : "light";
+            localStorage.setItem("theme", selectedTheme);
+            this.applyTheme(selectedTheme);
         });
     }
 
     // Theme setup helpers
 
-    changeLabelContent(selectedTheme: string) {
-        this.themeLabels.forEach((label) => {
-            label.textContent =
-                selectedTheme === "dark" ? "Dark Mode" : "Light Mode";
-        });
-    }
-
     applyTheme(selectedTheme: string) {
+        if (!this.themeCheckbox) return;
         if (selectedTheme === "dark") {
             document.body.setAttribute("data-theme", "dark");
-            this.themeCheckboxes.forEach((checkbox) => {
-                checkbox.checked = true;
-            });
-            this.changeLabelContent("dark");
+            this.themeCheckbox.checked = true;
         } else {
             document.body.setAttribute("data-theme", "light");
-            this.themeCheckboxes.forEach((checkbox) => {
-                checkbox.checked = false;
-            });
-            this.changeLabelContent("light");
+            this.themeCheckbox.checked = false;
         }
     }
 
     checkThemePreference() {
+        if (!this.themeCheckbox) return;
         const prefersDarkScheme = window.matchMedia(
             "(prefers-color-scheme: dark)"
         ).matches;
 
         if (prefersDarkScheme) {
-            this.themeCheckboxes.forEach((checkbox) => {
-                checkbox.checked = true;
-            });
-            this.changeLabelContent("dark");
+            this.themeCheckbox.checked = true;
         }
     }
 
     applySavedTheme() {
+        if (!this.themeCheckbox) return;
         const savedTheme = localStorage.getItem("theme") || "light";
         this.applyTheme(savedTheme);
-        this.changeLabelContent(savedTheme);
     }
 }

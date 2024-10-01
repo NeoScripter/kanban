@@ -84,3 +84,50 @@
     margin-top: 1rem;
     @include btn-tertiary();
 }
+
+.webform__danger-group {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.webform__title-danger {
+    color: $red-400;
+    @include fs18();
+}
+
+.webform__content-danger {
+    color: $gray-400;
+    @include fs14();
+}
+
+.webform__btn-danger {
+    flex: 1;
+    cursor: pointer;
+    font-family: "Bold";
+    padding: 0.75rem 1.25rem;
+    border-radius: 1.5rem;
+    border: none;
+    transition: background-color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.webform__btn-danger--delete {
+    color: $white-400;
+    background-color: $red-400;
+
+    @include hover() {
+        opacity: 0.7;
+    }
+}
+
+.webform__btn-danger--cancel {
+    color: $purple-400;
+    background-color: var(--li-bg-hover);
+
+    @include hover() {
+        background-color: $purple-400;
+        color: $white-400;
+    }
+}

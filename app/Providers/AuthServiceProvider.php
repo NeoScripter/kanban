@@ -28,5 +28,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-dashboard', function (User $user, Dashboard $dashboard) {
             return $user->id === $dashboard->user_id;
         });
+
+        Gate::define('edit-dashboard', function (User $user, Dashboard $dashboard) {
+            return $user->id === $dashboard->user_id;
+        });
     }
 }

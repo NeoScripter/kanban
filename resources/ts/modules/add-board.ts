@@ -1,4 +1,4 @@
-export default class PopupHandler {
+export default class addBoardHandler {
     addColumnBtnSelector: string;
     addNewColumnInputWrapperSelector: string;
     deleteColumnBtnSelector: string;
@@ -20,7 +20,6 @@ export default class PopupHandler {
         this.addBoardBtn = document.querySelector('#createBoardBtn');
         this.addBoardInputGroupParentSelector = '.webform__input-group--addBoard';
         this.createBoardPopup = document.querySelector('#createBoardPopup');
-
 
     }
 

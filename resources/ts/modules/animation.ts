@@ -25,7 +25,11 @@ export default class AnimationHandler {
     signupPopup: HTMLElement | null;
     flashMessage: HTMLElement | null;
 
+    loginDashboardBtn: HTMLElement | null;
 
+    deleteBoardBtnPopup: HTMLElement | null;
+    deleteBoardPopup: HTMLElement | null;
+    cancelDeleteBoardBtn: HTMLElement | null;
 
     constructor() {
         // Theme setup
@@ -62,6 +66,12 @@ export default class AnimationHandler {
         this.loginPopup = document.querySelector('#overlayLogin');
         this.signupPopup = document.querySelector('#overlaySignup');
         this.flashMessage = document.querySelector('.flash-message');
+        this.loginDashboardBtn = document.querySelector('#loginDashboardBtn');
+
+        // Delete Board
+        this.deleteBoardBtnPopup = document.querySelector('#deleteBoardPopupBtn');
+        this.deleteBoardPopup = document.querySelector('#deleteBoardPopup');
+        this.cancelDeleteBoardBtn = document.querySelector('#cancelDeleteBoardBtn');
     }
 
     init() {
@@ -73,6 +83,8 @@ export default class AnimationHandler {
         this.setupSignupPopupEvents();
         this.setupLoginPopupEvents();
         this.fadeOutFlashMessage();
+        this.openDeleteBoardPopup();
+        this.closeDeleteBoardPopup();
     }
 
     // Flash Message
@@ -93,7 +105,6 @@ export default class AnimationHandler {
 
     setupSignupPopupEvents() {
         if (!this.signupPopup || !this.signupBtn || !this.webformLoginBtn || !this.menuPopup) {
-            console.warn("Buttons or popups are not in the DOM!");
             return;
         }
 
@@ -114,8 +125,7 @@ export default class AnimationHandler {
     }
 
     setupLoginPopupEvents() {
-        if (!this.loginPopup || !this.loginBtn || !this.webformSignupBtn || !this.menuPopup) {
-            console.warn("Buttons or popups are not in the DOM!");
+        if (!this.loginPopup || !this.loginBtn || !this.webformSignupBtn || !this.menuPopup || !this.loginDashboardBtn) {
             return;
         }
 
@@ -126,6 +136,10 @@ export default class AnimationHandler {
                 this.closeAllOtherPopups();
                 this.loginPopup?.classList.add(this.popupVisibleClass);
             }
+        })
+
+        this.loginDashboardBtn.addEventListener('click', () => {
+            this.loginPopup?.classList.add(this.popupVisibleClass);
         })
 
         this.webformSignupBtn.addEventListener('click', () => {
@@ -197,6 +211,28 @@ export default class AnimationHandler {
                 this.editBoardPopupVisibleClassName
             );
         });
+    }
+
+    // Delete Board Popup
+
+    openDeleteBoardPopup() {
+        if (!this.deleteBoardBtnPopup || !this.deleteBoardPopup) {
+            return
+        }
+
+        this.deleteBoardBtnPopup.addEventListener('click', () => {
+            this.deleteBoardPopup?.classList.add(this.popupVisibleClass)
+        })
+    }
+
+    closeDeleteBoardPopup() {
+        if (!this.cancelDeleteBoardBtn || !this.deleteBoardPopup) {
+            return
+        }
+
+        this.cancelDeleteBoardBtn.addEventListener('click', () => {
+            this.deleteBoardPopup?.classList.remove(this.popupVisibleClass)
+        })
     }
 
     // Edit Board Popup Toggler

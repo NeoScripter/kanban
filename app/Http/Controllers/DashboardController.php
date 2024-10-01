@@ -47,7 +47,7 @@ class DashboardController extends Controller
         ]);
 
         // Add categories to the dashboard
-        foreach ($request->input('categories') as $categoryName) {
+        foreach ($request->input('categories', []) as $categoryName) {
             Category::create([
                 'name' => $categoryName,
                 'dashboard_id' => $dashboard->id,
@@ -61,27 +61,30 @@ class DashboardController extends Controller
 
     public function update(Request $request)
     {
+        $dashboardId = session('current_dashboard_id');
+        $dashboard = Dashboard::findOrFail($dashboardId);
+
+        $this->authorize('edit-dashboard', $dashboard);
+
         $validated = $request->validate([
             'boardName' => 'required|string|max:30',
             'categories' => 'array',
             'categories.*' => 'string|max:30'
         ]);
 
-        // Create a new dashboard for the authenticated user
-        $dashboard = Dashboard::create([
+
+        $dashboard->update([
             'name' => $validated['boardName'],
-            'user_id' => Auth::id(),
         ]);
 
-        // Add categories to the dashboard
-        foreach ($request->input('categories') as $categoryName) {
+        $dashboard->categories()->delete();
+
+        foreach ($request->input('categories', []) as $categoryName) {
             Category::create([
                 'name' => $categoryName,
                 'dashboard_id' => $dashboard->id,
             ]);
         }
-
-        session(['current_dashboard_id' => $dashboard->id]);
 
         return redirect()->route('home');
     }

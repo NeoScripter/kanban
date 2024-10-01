@@ -111,6 +111,11 @@
         }
     }
     @include fs15();
+
+    &.header__add-btn--disabled {
+        cursor: no-drop;
+        background-color: $purple-100;
+    }
 }
 
 .header__add-btn-content {

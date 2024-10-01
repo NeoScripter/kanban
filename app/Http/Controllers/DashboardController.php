@@ -11,9 +11,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        if (!Auth::check()) {
+            return view('welcome', [
+                'dashboards' => null
+            ]);
+        }
         $dashboards = Auth::user()->dashboards;
 
         $currentDashboardId = session('current_dashboard_id', $dashboards->first()->id ?? null);
+
+        session(['current_dashboard_id' => $currentDashboardId]);
 
         return view('welcome', compact('dashboards', 'currentDashboardId'));
     }
@@ -27,15 +34,15 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:30',
-            'categories' => 'array', // Categories must be an array
-            'categories.*' => 'string|max:30' // Each category must be a string
+        $validated = $request->validate([
+            'boardName' => 'required|string|max:30',
+            'categories' => 'array',
+            'categories.*' => 'string|max:30'
         ]);
 
         // Create a new dashboard for the authenticated user
         $dashboard = Dashboard::create([
-            'name' => $request->input('name'),
+            'name' => $validated['boardName'],
             'user_id' => Auth::id(),
         ]);
 
@@ -47,15 +54,44 @@ class DashboardController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard.index');
+        session(['current_dashboard_id' => $dashboard->id]);
+
+        return redirect()->route('home');
+    }
+
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'boardName' => 'required|string|max:30',
+            'categories' => 'array',
+            'categories.*' => 'string|max:30'
+        ]);
+
+        // Create a new dashboard for the authenticated user
+        $dashboard = Dashboard::create([
+            'name' => $validated['boardName'],
+            'user_id' => Auth::id(),
+        ]);
+
+        // Add categories to the dashboard
+        foreach ($request->input('categories') as $categoryName) {
+            Category::create([
+                'name' => $categoryName,
+                'dashboard_id' => $dashboard->id,
+            ]);
+        }
+
+        session(['current_dashboard_id' => $dashboard->id]);
+
+        return redirect()->route('home');
     }
 
     public function destroy(Dashboard $dashboard)
     {
-        $this->authorize('delete', $dashboard);
+        $this->authorize('delete-dashboard', $dashboard);
 
         $dashboard->delete();
 
-        return redirect()->route('dashboard.index')->with('success', 'Dashboard deleted successfully!');
+        return redirect()->route('home');
     }
 }

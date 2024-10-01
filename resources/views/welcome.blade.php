@@ -19,8 +19,11 @@
         </div>
     @endif
 
-    <div class="overlay overlay--visible" id="createBoardPopup">
-        @include('partials.create-board')
+    <div class="overlay" id="createBoardPopup">
+        @include('popups.create-board')
+    </div>
+    <div class="overlay" id="editBoardPopup">
+        @include('popups.edit-board')
     </div>
     <div class="overlay" id="overlaySignup">
         @livewire('signup')

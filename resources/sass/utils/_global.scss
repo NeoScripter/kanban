@@ -44,15 +44,15 @@ body {
     inset: 0;
     min-height: 100%;
     transition: opacity 0.5s ease-in-out,
-    transform 0.5s ease-in-out,
-    z-index 0.75s ease;
-    z-index: -1;
+    transform 0.5s ease-in-out;
+    pointer-events: none;
+    z-index: 11;
     opacity: 0;
 }
 
 .overlay--visible {
     opacity: 1;
-    z-index: 10;
+    pointer-events: all;
 }
 
 .main {

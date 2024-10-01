@@ -7,20 +7,21 @@
     transition: opacity 0.5s ease-in-out,
     transform 0.5s ease-in-out,
     z-index 0.75s ease;
-    z-index: -1;
+    z-index: 10;
     opacity: 0;
+    pointer-events: none;
 
 
     @include m1() {
         position: static;
         opacity: 1;
-        z-index: 1;
+        pointer-events: all;
     }
 }
 
 .sidebar__overlay--visible {
     opacity: 1;
-    z-index: 10;
+    pointer-events: all;
 }
 
 .sidebar {
@@ -77,7 +78,7 @@
         }
     }
 
-    button {
+    a {
         width: 100%;
         padding: 1rem 1.5rem;
         background-color: transparent;
@@ -105,7 +106,7 @@
 .sidebar__board--selected {
     background-color: $purple-400;
 
-    button {
+    a {
         color: $white-400;
     }
 

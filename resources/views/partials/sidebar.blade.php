@@ -1,23 +1,26 @@
 <sidebar class="sidebar__overlay">
 
     <div class="sidebar">
-        <h3 class="sidebar__title">All Boards ({{ $dashboards->count() }})</h3>
+        <h3 class="sidebar__title">All Boards ({{ $dashboards ? $dashboards->count() : 0 }})</h3>
 
-        <ul class="sidebar__boards">
-            @foreach ($dashboards as $dashboard)
-                <li class="sidebar__board {{ $dashboard->id == $currentDashboardId ? 'sidebar__board--selected' : '' }}">
-                    <a href="{{ route('dashboard.select', $dashboard->id) }}" class="sidebar__board-link">
-                        {!! file_get_contents(public_path('images/board.svg')) !!}
-                        {{ $dashboard->name }}
-                    </a>
-                </li>
-            @endforeach
-        </ul>
+        @auth
+            <ul class="sidebar__boards">
+                @foreach ($dashboards as $dashboard)
+                    <li class="sidebar__board {{ $dashboard->id == $currentDashboardId ? 'sidebar__board--selected' : '' }}">
+                        <a href="{{ route('dashboard.select', $dashboard->id) }}" class="sidebar__board-link">
+                            {!! file_get_contents(public_path('images/board.svg')) !!}
+                            {{ $dashboard->name }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
 
-        <button class="sidebar__create-btn">
-            {!! file_get_contents(public_path('images/board.svg')) !!}
-            + Create new board
-        </button>
+            <button class="sidebar__create-btn" id="createBoardBtn">
+                {!! file_get_contents(public_path('images/board.svg')) !!}
+                + Create new board
+            </button>
+        @endauth
+
 
         <div class="sidebar__theme-group">
             <div class="sidebar__theme-wrapper">

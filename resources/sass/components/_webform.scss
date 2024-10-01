@@ -28,12 +28,41 @@
         @include fs14();
     }
 
+    input:user-invalid {
+        outline: 1px solid $red-400;
+    }
+
+    input:user-valid {
+        outline: 1px solid green;
+    }
+
     input::placeholder {
         color: $gray-400;
     }
 
     .category-input {
-        margin-bottom: 0.5rem;
+        flex: 1;
+    }
+}
+
+.webform__cat-wrapper {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.webform__delete-cat {
+    background-color: transparent;
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+
+    img {
+        width: 0.9rem;
+        height: 0.9rem;
     }
 }
 

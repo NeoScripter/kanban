@@ -25,6 +25,8 @@ export default class AnimationHandler {
     signupPopup: HTMLElement | null;
     flashMessage: HTMLElement | null;
 
+
+
     constructor() {
         // Theme setup
         this.themeLabels = document.querySelectorAll(

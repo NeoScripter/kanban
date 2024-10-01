@@ -3,10 +3,10 @@
         <img src="{{ asset('images/logo.svg') }}" alt="logo">
     </div>
     <h1 class="header__logo-text">kanban</h1>
-    <h2 class="header__board">Platform Launch</h2>
+    <h2 class="header__board">{{ $dashboards ? optional($dashboards->firstWhere('id', session('current_dashboard_id')))->name : '' }}</h2>
 
     <button class="header__board-btn">
-        Platform Launch
+        {{ $dashboards ? optional($dashboards->firstWhere('id', session('current_dashboard_id')))->name : '' }}
         <img src="{{ asset('images/dropdown.svg') }}" alt="purple arrow">
     </button>
 
@@ -27,8 +27,15 @@
 
     </div>
 
-    <div class="header__board-popup">
-        <button class="header__edit-board">Edit Board</button>
-        <button class="header__delete-board">Delete Board</button>
-    </div>
+    @if ($dashboards)
+        <div class="header__board-popup">
+            <button class="header__edit-board">Edit Board</button>
+            <form action="{{ route('dashboard.destroy', session('current_dashboard_id')) }}" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit" class="header__delete-board">Delete Board</button>
+            </form>
+        </div>
+    @endif
+
 </header>

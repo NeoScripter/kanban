@@ -16,12 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Controller::class, 'index'])->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('home');
 
-Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard.index');
+Route::get('/select/{id}', [DashboardController::class, 'selectDashboard'])->name('dashboard.select');
 
-Route::get('/select/{id}', [DashboardController::class, 'selectDashboard'])->middleware('auth')->name('dashboard.select');
+Route::post('/dashboard.store', [DashboardController::class, 'store'])->name('dashboard.store');
 
-Route::post('/', [DashboardController::class, 'store'])->middleware('auth')->name('dashboard.store');
+Route::put('/dashboard.edit', [DashboardController::class, 'update'])->name('dashboard.edit');
 
-Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth')->name('logout');
+Route::delete('/dashboard/{dashboard}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
+
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');

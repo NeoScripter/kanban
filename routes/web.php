@@ -38,3 +38,5 @@ Route::put('/task/update/{task}', [TaskController::class, 'update'])->name('task
 Route::get('/task/display/{task}/editing', [DashboardController::class, 'index'])->name('task.show');
 
 Route::put('/task/edit/{task}', [TaskController::class, 'edit'])->name('task.edit');
+
+Route::delete('/task/delete/{task}', [TaskController::class, 'destroy'])->name('task.destroy');

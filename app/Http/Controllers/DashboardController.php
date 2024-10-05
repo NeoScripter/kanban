@@ -52,7 +52,7 @@ class DashboardController extends Controller
     {
         session(['current_dashboard_id' => $id]);
 
-        return redirect()->back();
+        return redirect()->route('home');
     }
 
     public function store(Request $request)

@@ -1,7 +1,7 @@
 <sidebar class="sidebar__overlay">
 
     <div class="sidebar">
-        <h3 class="sidebar__title">All Boards ({{ $dashboards ? $dashboards->count() : 0 }})</h3>
+        <h3 class="sidebar__title">{{ __('content.sidebar_all_boards')}} ({{ $dashboards ? $dashboards->count() : 0 }})</h3>
 
         @auth
             <ul class="sidebar__boards">
@@ -17,7 +17,7 @@
 
             <button class="sidebar__create-btn" id="createBoardBtn">
                 {!! file_get_contents(public_path('images/board.svg')) !!}
-                + Create new board
+                + {{ __('content.sidebar_new_board')}}
             </button>
         @endauth
 
@@ -41,12 +41,12 @@
         @guest
             <button class="sidebar__login" id="openLoginPopup">
                 {!! file_get_contents(public_path('images/login.svg')) !!}
-                Login
+                {{ __('content.dashboard_login')}}
             </button>
 
             <button class="sidebar__signup" id="openSignupPopup">
                 {!! file_get_contents(public_path('images/signup.svg')) !!}
-                Sign up
+                {{ __('content.dashboard_signup')}}
             </button>
         @endguest
 
@@ -55,7 +55,7 @@
                 @csrf
                 <button class="sidebar__logout" id="logoutBtn" aria-label="Log out">
                     {!! file_get_contents(public_path('images/login.svg')) !!}
-                    Logout
+                    {{ __('content.dashboard_logout')}}
                 </button>
             </form>
         @endauth
@@ -63,7 +63,7 @@
 
         <button class="sidebar__hide-btn">
             {!! file_get_contents(public_path('images/hide-bar.svg')) !!}
-            Hide Bar
+            {{ __('content.sidebar_hide_bar')}}
         </button>
 
     </div>

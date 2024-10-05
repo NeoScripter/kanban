@@ -84,9 +84,7 @@ export default class AnimationHandler {
         );
 
         // Delete Task
-        this.deleteTaskBtnPopup = document.querySelector(
-            "#deleteTaskPopupBtn"
-        );
+        this.deleteTaskBtnPopup = document.querySelector("#deleteTaskPopupBtn");
         this.deleteTaskPopup = document.querySelector("#deleteTaskPopup");
         this.cancelDeleteTaskBtn = document.querySelector(
             "#cancelDeleteTaskBtn"
@@ -119,7 +117,7 @@ export default class AnimationHandler {
         this.closeDeleteTaskPopup();
         this.assignColorsToSpans();
         this.openAddTaskPopup();
-        this. openEditTaskPopup();
+        this.openEditTaskPopup();
     }
 
     // Open Add New Task Popup
@@ -133,7 +131,6 @@ export default class AnimationHandler {
             this.addTaskPopup?.classList.add(this.popupVisibleClass);
         });
     }
-
 
     // Assign colors to spans
 
@@ -282,6 +279,20 @@ export default class AnimationHandler {
             this.editBoardPopup?.classList.toggle(
                 this.editBoardPopupVisibleClassName
             );
+        });
+
+        document.addEventListener("click", (e) => {
+            const targetElement = e.target as HTMLElement;
+
+            if (
+                this.editBoardPopup &&
+                !this.editBoardPopup.contains(targetElement) &&
+                !this.editBoardPopupBtn?.contains(targetElement)
+            ) {
+                this.editBoardPopup.classList.remove(
+                    this.editBoardPopupVisibleClassName
+                );
+            }
         });
     }
 

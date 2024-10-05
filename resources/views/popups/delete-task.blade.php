@@ -1,5 +1,5 @@
 <div class="overlay" id="deleteTaskPopup">
-    <form action="" method="post" class="webform">
+    <form action="{{ route('task.destroy', $selectedTask) }}" method="post" class="webform">
         @csrf
         @method('delete')
 

@@ -2,7 +2,7 @@
     <div class="header__logo-img">
         <img src="{{ asset('images/logo.svg') }}" alt="logo">
     </div>
-    <h1 class="header__logo-text">kanban</h1>
+    <h1 class="header__logo-text">{{ __('content.app_name')}}</h1>
     <h2 class="header__board">
         {{ $dashboards ? optional($dashboards->firstWhere('id', session('current_dashboard_id')))->name : '' }}</h2>
 
@@ -14,19 +14,19 @@
     <div class="header__btn-group">
 
         @auth
-            <h3 class="header__board">Hi, {{ auth()->user()->name }}!</h3>
+            <h3 class="header__board">{{ __('content.greeting')}}, {{ auth()->user()->name }}!</h3>
 
             @foreach ($dashboards as $dashboard)
                 @if (session('current_dashboard_id') == $dashboard->id)
                     @if ($dashboard->categories->isNotEmpty())
                         <button class="header__add-btn" id="addNewTaskBtn">
                             <img src="{{ asset('images/plus.svg') }}" alt="plus sign">
-                            <span class="header__add-btn-content">Add New Task</span>
+                            <span class="header__add-btn-content">{{ __('content.header_add_task')}}</span>
                         </button>
                     @else
                         <button class="header__add-btn header__add-btn--disabled">
                             <img src="{{ asset('images/plus.svg') }}" alt="plus sign">
-                            <span class="header__add-btn-content">Add New Task</span>
+                            <span class="header__add-btn-content">{{ __('content.header_add_task')}}</span>
                         </button>
                     @endif
                 @endif
@@ -37,7 +37,7 @@
         @guest
             <button class="header__add-btn header__add-btn--disabled">
                 <img src="{{ asset('images/plus.svg') }}" alt="plus sign">
-                <span class="header__add-btn-content">Add New Task</span>
+                <span class="header__add-btn-content">{{ __('content.header_add_task')}}</span>
             </button>
         @endguest
 
@@ -50,8 +50,8 @@
 
     @if ($dashboards)
         <div class="header__board-popup">
-            <button class="header__edit-board" id="editBoardBtn">Edit Board</button>
-            <button class="header__delete-board"  id="deleteBoardPopupBtn">Delete Board</button>
+            <button class="header__edit-board" id="editBoardBtn">{{ __('content.header_edit_board')}}</button>
+            <button class="header__delete-board"  id="deleteBoardPopupBtn">{{ __('content.header_delete_board')}}</button>
         </div>
     @endif
 

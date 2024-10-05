@@ -30,10 +30,17 @@ export default class AnimationHandler {
     deleteBoardPopup: HTMLElement | null;
     cancelDeleteBoardBtn: HTMLElement | null;
 
+    deleteTaskBtnPopup: HTMLElement | null;
+    deleteTaskPopup: HTMLElement | null;
+    cancelDeleteTaskBtn: HTMLElement | null;
+
     coloredSpans: NodeListOf<HTMLElement> | null;
 
     addTaskBtnPopup: HTMLElement | null;
     addTaskPopup: HTMLElement | null;
+
+    editTaskPopup: HTMLElement | null;
+    editTaskPopupBtn: HTMLElement | null;
 
     constructor() {
         // Theme setup
@@ -76,12 +83,25 @@ export default class AnimationHandler {
             "#cancelDeleteBoardBtn"
         );
 
+        // Delete Task
+        this.deleteTaskBtnPopup = document.querySelector(
+            "#deleteTaskPopupBtn"
+        );
+        this.deleteTaskPopup = document.querySelector("#deleteTaskPopup");
+        this.cancelDeleteTaskBtn = document.querySelector(
+            "#cancelDeleteTaskBtn"
+        );
+
         // Colored spans
         this.coloredSpans = document.querySelectorAll(".dashboard__color");
 
         // Add New Task
         this.addTaskPopup = document.querySelector("#addTaskPopup");
         this.addTaskBtnPopup = document.querySelector("#addNewTaskBtn");
+
+        // Edit Task
+        this.editTaskPopup = document.querySelector("#editTaskOverlay");
+        this.editTaskPopupBtn = document.querySelector("#editTaskBtn");
     }
 
     init() {
@@ -95,8 +115,11 @@ export default class AnimationHandler {
         this.fadeOutFlashMessage();
         this.openDeleteBoardPopup();
         this.closeDeleteBoardPopup();
+        this.openDeleteTaskPopup();
+        this.closeDeleteTaskPopup();
         this.assignColorsToSpans();
         this.openAddTaskPopup();
+        this. openEditTaskPopup();
     }
 
     // Open Add New Task Popup
@@ -281,6 +304,42 @@ export default class AnimationHandler {
 
         this.cancelDeleteBoardBtn.addEventListener("click", () => {
             this.deleteBoardPopup?.classList.remove(this.popupVisibleClass);
+        });
+    }
+
+    // Delete Task Popup
+
+    openDeleteTaskPopup() {
+        if (!this.deleteTaskBtnPopup || !this.deleteTaskPopup) {
+            return;
+        }
+
+        this.deleteTaskBtnPopup.addEventListener("click", () => {
+            this.closeAllOtherPopups();
+            this.deleteTaskPopup?.classList.add(this.popupVisibleClass);
+        });
+    }
+
+    closeDeleteTaskPopup() {
+        if (!this.cancelDeleteTaskBtn || !this.deleteTaskPopup) {
+            return;
+        }
+
+        this.cancelDeleteTaskBtn.addEventListener("click", () => {
+            this.deleteTaskPopup?.classList.remove(this.popupVisibleClass);
+        });
+    }
+
+    // Edit Task Popup
+
+    openEditTaskPopup() {
+        if (!this.editTaskPopupBtn || !this.editTaskPopup) {
+            return;
+        }
+
+        this.editTaskPopupBtn.addEventListener("click", () => {
+            this.closeAllOtherPopups();
+            this.editTaskPopup?.classList.add(this.popupVisibleClass);
         });
     }
 

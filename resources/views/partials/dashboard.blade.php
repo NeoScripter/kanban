@@ -6,15 +6,13 @@
                 @if (session('current_dashboard_id') == $dashboard->id)
                     @foreach ($dashboard->categories as $category)
                         <div class="dashboard__column">
-                            <h3 class="dashboard__title"><span class="dashboard__color"></span> {{ $category->name }} (4)</h3>
-                            <div class="dashboard__task">
-                                <h4 class="dashboard__task-title">Build UI for onboarding flow</h4>
-                                <p class="dashboard__task-content">0 of 3 subtasks</p>
-                            </div>
-                            <div class="dashboard__task">
-                                <h4 class="dashboard__task-title">Build UI for onboarding flow</h4>
-                                <p class="dashboard__task-content">0 of 3 subtasks</p>
-                            </div>
+                            <h3 class="dashboard__title"><span class="dashboard__color"></span> {{ $category->name }} ({{ $category->tasks->count() }})</h3>
+                            @foreach ($category->tasks as $task)
+                                <a href="{{ route('task.display', $task) }}" class="dashboard__task">
+                                    <h4 class="dashboard__task-title">{{ $task->title }}</h4>
+                                    <p class="dashboard__task-content">{{ $task->subtasks->where('is_completed', true)->count() }} of {{ $task->subtasks->count() }} subtasks</p>
+                                </a>
+                            @endforeach
                         </div>
                     @endforeach
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,13 @@ Route::put('/dashboard.edit', [DashboardController::class, 'update'])->name('das
 Route::delete('/dashboard', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::post('/task.store', [TaskController::class, 'store'])->name('task.store');
+
+Route::get('/task/display/{task}', [DashboardController::class, 'index'])->name('task.display');
+
+Route::put('/task/update/{task}', [TaskController::class, 'update'])->name('task.update');
+
+Route::get('/task/display/{task}/editing', [DashboardController::class, 'index'])->name('task.show');
+
+Route::put('/task/edit/{task}', [TaskController::class, 'edit'])->name('task.edit');

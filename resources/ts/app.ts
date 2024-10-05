@@ -4,6 +4,7 @@ import AnimationHandler from "./modules/animation";
 import addBoardHandler from "./modules/add-board";
 import EditBoardHandler from "./modules/edit-board";
 import addTaskHandler from "./modules/add-task";
+import editTaskHandler from "./modules/edit-task";
 
 document.addEventListener("DOMContentLoaded", () => {
     const animationHandler = new AnimationHandler();
@@ -14,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     currentBoardHandler.init();
     const newTaskHandler = new addTaskHandler();
     newTaskHandler.init();
+    const newEditTaskHandler = new editTaskHandler();
+    newEditTaskHandler.init();
 });
 
 

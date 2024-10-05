@@ -6,7 +6,6 @@
     border-radius: 0.75rem;
     width: min(30rem, 95vw);
     color: var(--font-color);
-
 }
 
 .webform__title {
@@ -30,6 +29,7 @@
         background-color: var(--body-bg);
         color: var(--font-color);
         border-color: $gray-200;
+        border-radius: 0.5rem;
         @include fs14();
     }
 
@@ -126,8 +126,7 @@
     padding: 0.75rem 1.25rem;
     border-radius: 1.5rem;
     border: none;
-    transition: background-color 0.3s ease,
-    opacity 0.3s ease;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .webform__btn-danger--delete {
@@ -147,4 +146,104 @@
         background-color: $purple-400;
         color: $white-400;
     }
+}
+
+.webform__task-headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.task-description {
+    color: $gray-400;
+    border-color: $gray-200;
+    @include fs15();
+}
+
+.webform__checkbox-group {
+    h3 {
+        display: block;
+        color: $gray-400;
+        margin-bottom: 0.8rem;
+        margin-top: 1rem;
+
+        @include fs14();
+    }
+}
+
+.webform__checkbox-wrapper {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    background-color: var(--body-bg);
+    transition: background-color 0.3s ease;
+    color: var(--font-color);
+    @include fs15();
+
+    @include hover() {
+        background-color: $purple-50;
+    }
+
+    &.subtask--completed {
+        color: $gray-400;
+        text-decoration: line-through;
+      }
+
+    .checkbox-input {
+        border-radius: 0.2rem;
+        border: rem(1px) solid $gray-200;
+        position: relative;
+        display: grid;
+        place-content: center;
+        background-color: transparent;
+        cursor: pointer;
+        width: 1.5rem;
+        height: 1.5rem;
+        flex-shrink: 0;
+        -webkit-appearance: none;
+        appearance: none;
+
+    }
+
+
+
+    .checkbox-input:checked {
+        background-color: $purple-400;
+    }
+
+    .checkbox-input::before {
+        position: absolute;
+        content: "";
+        inset: 0.2rem;
+        z-index: 20;
+        transform: scale(0);
+        transition: 120ms transform ease-in-out;
+        box-shadow: inset 1rem 1rem #fff;
+        transform-origin: bottom left;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+
+
+      }
+
+      .checkbox-input:checked::before {
+        transform: scale(1);
+      }
+
+}
+
+.webform__task-headline {
+    position: relative;
+}
+
+#editTaskPopup {
+    right: -1.5rem;
+    top: 2.5rem;
+    width: max-content;
+    border: 1px solid var(--border-color);
 }

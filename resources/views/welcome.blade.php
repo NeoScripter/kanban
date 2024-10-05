@@ -27,6 +27,8 @@
         @include('popups.delete-board')
 
         @include('popups.add-task')
+
+        @include('popups.display-task')
     @endauth
 
     @livewire('signup')

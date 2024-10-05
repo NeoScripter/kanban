@@ -4,27 +4,49 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Dashboard;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Task $task = null)
     {
         if (!Auth::check()) {
             return view('welcome', [
                 'dashboards' => null,
-                'currentDashboardId' => null
+                'currentDashboardId' => null,
+                'selectedTask' => null
             ]);
         }
-        $dashboards = Auth::user()->dashboards;
+
+        $dashboards = Auth::user()->dashboards()->with(['categories.tasks'])->get();
+
+        $dashboards->each(function ($dashboard) {
+            $dashboard->categories = $dashboard->categories->sortByDesc(function ($category) {
+                return $category->tasks->count();
+            });
+        });
+
 
         $currentDashboardId = session('current_dashboard_id', $dashboards->first()->id ?? null);
 
         session(['current_dashboard_id' => $currentDashboardId]);
 
-        return view('welcome', compact('dashboards', 'currentDashboardId'));
+        if ($task && !Gate::allows('edit-task', $task)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $selectedTask = $task ? Task::with('subtasks')->find($task->id) : null;
+
+        return view('welcome', [
+            'dashboards' => $dashboards,
+            'currentDashboardId' => $currentDashboardId,
+            'selectedTask' => $selectedTask
+        ]);
     }
+
 
     public function selectDashboard($id)
     {
@@ -78,9 +100,18 @@ class DashboardController extends Controller
             'name' => $validated['boardName'],
         ]);
 
-        $dashboard->categories()->delete();
+        $existingCategories = $dashboard->categories->pluck('name', 'id')->toArray();
 
-        foreach ($request->input('categories', []) as $categoryName) {
+        $newCategories = $request->input('categories', []);
+
+        $categoriesToDelete = array_diff($existingCategories, $newCategories);
+        $categoriesToCreate = array_diff($newCategories, $existingCategories);
+
+        if (!empty($categoriesToDelete)) {
+            $dashboard->categories()->whereIn('name', array_values($categoriesToDelete))->delete();
+        }
+
+        foreach ($categoriesToCreate as $categoryName) {
             Category::create([
                 'name' => $categoryName,
                 'dashboard_id' => $dashboard->id,

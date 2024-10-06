@@ -11,6 +11,6 @@ class LogoutController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('home')->with('success', 'Successfully logged out!');
+        return redirect()->route('home')->with('success', __('content.flash_logout'));
     }
 }

@@ -31,9 +31,13 @@
         @include('popups.display-task')
     @endauth
 
-    @livewire('signup')
+    <div class="overlay" id="overlaySignup">
+        @livewire('signup')
+    </div>
 
-    @livewire('login')
+    <div class="overlay" id="overlayLogin">
+        @livewire('login')
+    </div>
 
     <div class="wrapper">
         @include ('partials.header')

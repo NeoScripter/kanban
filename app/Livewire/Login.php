@@ -25,7 +25,7 @@ class Login extends Component
 
         $this->reset();
 
-        return redirect()->route('home')->with('success', 'Successfully logged in!');
+        return redirect()->route('home')->with('success', __('content.flash_login'));
     }
 
     public function render()

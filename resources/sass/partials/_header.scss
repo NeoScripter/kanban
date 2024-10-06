@@ -185,3 +185,42 @@
 .header__delete-board {
     color: $red-400;
 }
+
+.lang-dropdown {
+    position: relative;
+    height: 20px;
+    margin-right: 0.3rem;
+
+}
+
+.lang-dropdown__toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.lang-dropdown__menu {
+    position: absolute;
+    z-index: 20;
+    top: 1.7rem;
+    left: -0.5rem;
+    background-color: var(--body-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: grid;
+    gap: 0.3rem;
+
+
+    .dropdown-item {
+        width: 2rem;
+        display: block;
+    }
+
+}
+
+.lang-dropdown:has(.lang-dropdown__toggle[aria-expanded="false"]) {
+    .lang-dropdown__menu {
+        display: none;
+    }
+}

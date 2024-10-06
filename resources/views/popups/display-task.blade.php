@@ -12,8 +12,8 @@
                     <img src="{{ asset('images/dots.svg') }}" alt="three vertical dots">
                 </button>
                 <div class="header__board-popup" id="editTaskPopup">
-                    <button type="button" class="header__edit-board" id="editTaskBtn">Edit Task</button>
-                    <button type="button" class="header__delete-board"  id="deleteTaskPopupBtn">Delete Task</button>
+                    <button type="button" class="header__edit-board" id="editTaskBtn">{{ __('content.task_edit_task')}}</button>
+                    <button type="button" class="header__delete-board"  id="deleteTaskPopupBtn">{{ __('content.task_delete_task')}}</button>
                 </div>
             </div>
             <div class="webform__input-group">
@@ -21,7 +21,7 @@
             </div>
 
             <div class="webform__checkbox-group">
-                <h3>Subtasks ({{ $selectedTask->subtasks->where('is_completed', true)->count() }} of
+                <h3>{{ __('content.task_subtasks')}} ({{ $selectedTask->subtasks->where('is_completed', true)->count() }} {{ __('content.dashboard_of')}}
                     {{ $selectedTask->subtasks->count() }})</h3>
                 @foreach ($selectedTask->subtasks as $subtask)
                     <label for="subtask-{{ $subtask->id }}"
@@ -40,7 +40,7 @@
                 @auth
                     @foreach ($dashboards as $dashboard)
                         @if (session('current_dashboard_id') == $dashboard->id)
-                            <label for="selectEditingTaskStatus">Current Status:</label>
+                            <label for="selectEditingTaskStatus">{{ __('content.task_current_status')}}</label>
                             <select name="selectEditingTaskStatus" id="selectEditingTaskStatus">
                                 @foreach ($dashboard->categories as $category)
                                     @if ($selectedTask->category_id === $category->id)
@@ -55,7 +55,7 @@
                 @endauth
             </div>
 
-            <button type="submit" class="webform__submit-btn">Update Task</button>
+            <button type="submit" class="webform__submit-btn">{{ __('content.task_update_task')}}</button>
         </form>
     </div>
 @endif

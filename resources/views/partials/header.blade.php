@@ -13,6 +13,20 @@
 
     <div class="header__btn-group">
 
+        <div class="lang-dropdown">
+            <button class="lang-dropdown__toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ config('app.locales')[app()->getLocale()]['flag'] }}" width="30" height="20" alt="Current Language">
+            </button>
+
+            <div class="lang-dropdown__menu" aria-labelledby="languageDropdown">
+                @foreach (config('app.locales') as $locale => $details)
+                    <a class="dropdown-item" href="{{ route('lang.switch', $locale) }}">
+                        <img src="{{ $details['flag'] }}" width="30" height="20" alt="{{ $details['name'] }}">
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
         @auth
             <h3 class="header__board">{{ __('content.greeting')}}, {{ auth()->user()->name }}!</h3>
 

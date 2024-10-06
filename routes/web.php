@@ -40,3 +40,13 @@ Route::get('/task/display/{task}/editing', [DashboardController::class, 'index']
 Route::put('/task/edit/{task}', [TaskController::class, 'edit'])->name('task.edit');
 
 Route::delete('/task/delete/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
+
+Route::get('lang/{locale}', function ($locale) {
+    if (!array_key_exists($locale, config('app.locales'))) {
+        abort(400);
+    }
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->name('lang.switch');

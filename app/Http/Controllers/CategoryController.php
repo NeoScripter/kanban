@@ -23,13 +23,13 @@ class CategoryController extends Controller
             'name' => $request->input('name'),
         ]);
 
-        return redirect()->route('dashboard.show', $category->dashboard_id)->with('success', 'Category updated successfully!');
+        return redirect()->route('dashboard.show', $category->dashboard_id)->with('success', __('content.flash_cat_update'));
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
 
-        return redirect()->route('dashboard.show', $category->dashboard_id)->with('success', 'Category deleted successfully!');
+        return redirect()->route('dashboard.show', $category->dashboard_id)->with('success', __('content.flash_cat_delete'));
     }
 }

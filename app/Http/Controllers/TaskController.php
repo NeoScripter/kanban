@@ -54,7 +54,7 @@ class TaskController extends Controller
             $task->subtasks()->whereIn('id', $completedSubtaskIds)->update(['is_completed' => true]);
         }
 
-        return redirect()->route('home')->with('success', 'Task updated successfully!');
+        return redirect()->route('home')->with('success', __('content.flash_task'));
     }
 
     public function edit(Request $request, Task $task)
@@ -92,7 +92,7 @@ class TaskController extends Controller
             ]);
         }
 
-        return redirect()->route('home')->with('success', 'Task updated successfully!');
+        return redirect()->route('home')->with('success', __('content.flash_task'));
     }
 
     public function destroy(Task $task)

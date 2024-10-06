@@ -42,6 +42,8 @@ export default class AnimationHandler {
     editTaskPopup: HTMLElement | null;
     editTaskPopupBtn: HTMLElement | null;
 
+    languageSwitchBtn: HTMLElement | null;
+
     constructor() {
         // Theme setup
         this.themeCheckbox = document.querySelector("#dark-mode");
@@ -100,6 +102,11 @@ export default class AnimationHandler {
         // Edit Task
         this.editTaskPopup = document.querySelector("#editTaskOverlay");
         this.editTaskPopupBtn = document.querySelector("#editTaskBtn");
+
+        // Toggle Language Switch
+        this.languageSwitchBtn = document.querySelector(
+            ".lang-dropdown__toggle"
+        );
     }
 
     init() {
@@ -118,6 +125,19 @@ export default class AnimationHandler {
         this.assignColorsToSpans();
         this.openAddTaskPopup();
         this.openEditTaskPopup();
+        this.toggleLanguageSwitchBtn();
+    }
+
+    // Toggle Language Switch Button
+
+    toggleLanguageSwitchBtn() {
+        if (!this.languageSwitchBtn) return;
+
+        this.languageSwitchBtn.addEventListener("click", function () {
+            const expanded = this.getAttribute("aria-expanded") === "true";
+
+            this.setAttribute("aria-expanded", expanded ? "false" : "true");
+        });
     }
 
     // Open Add New Task Popup

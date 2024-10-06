@@ -85,6 +85,8 @@ return [
 
     'locale' => 'ru',
 
+    'locales' => require_once __DIR__ . '/locales.php',
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
